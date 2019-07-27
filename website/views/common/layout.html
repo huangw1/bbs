@@ -1,10 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-    {{template "content" .}}
-</body>
-</html>
+{{include "common/header" .}}
+{{include "common/nav" .}}
+<section class="section">
+    <div class="container">
+        <div class="columns">
+            {{template "content" .}}
+        </div>
+    </div>
+</section>
+{{include "common/footer" .}}

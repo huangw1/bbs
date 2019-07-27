@@ -1,0 +1,105 @@
+{{define "content"}}
+<div class="column is-9">
+    <div class="card">
+        <div class="card-content">
+                <div class="tile is-child">
+                    <p class="title">{{.Article.Title}}</p>
+                    <p class="subtitle">
+                        <a href="{{userUrl .Article.User.Id}}">
+                            <span class="is-size-7">{{.Article.User.Username}}</span>
+                        </a>
+                        <span class="has-text-grey is-size-7">
+                        {{prettyTime .Article.CreateTime}}
+                        </span>
+                        {{if .Article.Tags}}
+                        {{range .Article.Tags}}
+                            <a href="{{tagArticlesUrl .TagId 1}}">
+                                <span class="tag">
+                                {{.TagName}}
+                                </span>
+                            </a>
+                        {{end}}
+                        {{end}}
+                    </p>
+                    <div class="content">
+                    {{if .Article.Type}}
+                    {{else}}
+                        {{.Article.Content}}
+                    {{end}}
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>
+<div class="column is-3">
+    <div class="card">
+        <div class="card-content">
+            <div class="content">
+                <article class="media">
+                    <div class="media-left">
+                        <img style="border-radius: 100%" width="64" height="64" src="{{.Article.User.Avatar}}">
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <div>
+                                <a href="{{userUrl .Article.User.Id}}">
+                                {{.Article.User.Username}}
+                                </a>
+                                <div class="content line-clamp line-clamp-2">
+                                {{if .Article.User.Description}}
+                                    {{.Article.User.Description}}
+                                {{else}}
+                                    该用户未更新个人状态
+                                {{end}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+    {{if .Article.Toc}}
+        <div class="card is-sticky toc">
+            <div class="card-content">
+                <div class="content">
+                    <div class="header">目录</div>
+                    <div class="content">
+                    {{.Article.Toc}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{end}}
+</div>
+
+<link href="//cdn.bootcss.com/highlight.js/8.0/styles/monokai_sublime.min.css" rel="stylesheet">
+<script src="//cdn.bootcss.com/highlight.js/8.0/highlight.min.js"></script>
+<script type="text/javascript">
+    // 高亮
+    hljs.initHighlightingOnLoad()
+
+    // 处理toc目录
+    handleToc('.toc')
+
+    // 删除文章
+    function delArticle(articleId) {
+        httpPost('{{baseUrl}}/article/delete/' + articleId)
+                .then(function (data) {
+                    alert('删除成功')
+                }, function (response) {
+                    alert(response.message)
+                })
+    }
+
+    // 收藏
+    function addFavorite(articleId) {
+        httpPost('{{baseUrl}}/article/favorite/' + articleId)
+                .then(function (data) {
+                    alert('收藏成功')
+                }, function (response) {
+                    console.error(response)
+                })
+    }
+</script>
+{{end}}

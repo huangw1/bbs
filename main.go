@@ -6,25 +6,43 @@
 package main
 
 import (
-	"github.com/gin-gonic/gin"
+	"github.com/huangw1/bbs/app"
 	"github.com/huangw1/bbs/database"
-	"github.com/huangw1/bbs/utils/config"
-	_ "github.com/huangw1/bbs/utils/process"
-	"github.com/huangw1/bbs/utils/template"
-	"net/http"
+	"github.com/huangw1/bbs/pkg/config"
+	_ "github.com/huangw1/bbs/pkg/process"
+	"github.com/huangw1/bbs/pkg/template"
+	"github.com/sirupsen/logrus"
 )
 
-func main() {
+func init() {
+	initConfig()
+	initLogrus()
+	initTemplate()
+	initDatabase()
+}
+
+func initConfig() {
 	config.InitConfig("bbs.yaml")
+}
 
-	database.OpenDB(&database.DBConfig{Dialect: "mysql", Url: config.Conf.MySqlUrl})
-	defer database.CloseDB()
+func initLogrus() {
+	// todo
+	logrus.SetLevel(logrus.InfoLevel)
+}
 
-	template.InitTemplate(&template.Config{})
+func initTemplate() {
+	template.InitTemplate()
+}
 
-	g := gin.New()
-	g.NoRoute(func(c *gin.Context) {
-		template.HTML(c, "index", nil)
+func initDatabase() {
+	database.OpenDB(&database.DBConfig{
+		Dialect:        "mysql",
+		Url:            config.Conf.MySqlUrl,
+		EnableLogModel: config.Conf.ShowSql,
 	})
-	http.ListenAndServe(":8080", g)
+}
+
+func main() {
+	defer database.CloseDB()
+	app.StartGin()
 }

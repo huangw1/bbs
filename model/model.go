@@ -6,9 +6,9 @@
 package model
 
 type Model struct {
-	Id         int64 `gorm:"PRIMARY_KEY;AUTO_INCREMENT" json:"id" form:"id"`
-	CreateTime int64 `json:"createTime" form:"createTime"`
-	UpdateTime int64 `json:"updateTime" form:"updateTime"`
+	Id         int64 `gorm:"PRIMARY_KEY;AUTO_INCREMENT;column:id" json:"id" form:"id"`
+	CreateTime int64 `gorm:"column:createTime" json:"createTime" form:"createTime"`
+	UpdateTime int64 `gorm:"column:updateTime" json:"updateTime" form:"updateTime"`
 }
 
 // t_user
@@ -24,17 +24,17 @@ const (
 
 type User struct {
 	Model
-	Username    string `json:"username" form:"username"`
-	Name        string `json:"name" form:"name"`
-	Avatar      string `json:"avatar" form:"avatar"`
-	Email       string `json:"email" form:"email"`
-	Password    string `json:"password" form:"password"`
-	Roles       string `json:"roles" form:"roles"`
-	Description string `json:"description" form:"description"`
-	City        string `json:"city" form:"city"`
-	Company     string `json:"company" form:"company"`
-	Type        int    `json:"type" form:"type"`
-	Status      int    `json:"status" form:"status"`
+	Username    string `gorm:"column:username" json:"username" form:"username"`
+	Name        string `gorm:"column:name" json:"name" form:"name"`
+	Avatar      string `gorm:"column:avatar" json:"avatar" form:"avatar"`
+	Email       string `gorm:"column:email" json:"email" form:"email"`
+	Password    string `gorm:"column:password" json:"password" form:"password"`
+	Roles       string `gorm:"column:roles" json:"roles" form:"roles"`
+	Description string `gorm:"column:description" json:"description" form:"description"`
+	City        string `gorm:"column:city" json:"city" form:"city"`
+	Company     string `gorm:"column:company" json:"company" form:"company"`
+	Type        int    `gorm:"column:type" json:"type" form:"type"`
+	Status      int    `gorm:"column:status" json:"status" form:"status"`
 }
 
 // t_third_user
@@ -44,15 +44,15 @@ const (
 
 type ThirdUser struct {
 	Model
-	UserId   int64  `json:"userId" form:"userId"`
-	ThirdId  int64  `json:"thirdId" form:"thirdId"`
-	Type     int    `json:"type" form:"type"`
-	Username string `json:"Username" form:"Username"`
-	Name     string `json:"Name" form:"Name"`
-	Email    string `json:"email" form:"email"`
-	Avatar   string `json:"avatar" form:"avatar"`
-	Url      string `json:"url" form:"url"`
-	HtmlUrl  string `json:"htmlUrl" form:"htmlUrl"`
+	UserId   int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	ThirdId  int64  `gorm:"column:thirdId" json:"thirdId" form:"thirdId"`
+	Type     int    `gorm:"column:type" json:"type" form:"type"`
+	Username string `gorm:"column:username" json:"username" form:"username"`
+	Name     string `gorm:"column:name" json:"name" form:"name"`
+	Email    string `gorm:"column:email" json:"email" form:"email"`
+	Avatar   string `gorm:"column:avatar" json:"avatar" form:"avatar"`
+	Url      string `gorm:"column:url" json:"url" form:"url"`
+	HtmlUrl  string `gorm:"column:htmlUrl" json:"htmlUrl" form:"htmlUrl"`
 }
 
 // t_category
@@ -63,9 +63,9 @@ const (
 
 type Category struct {
 	Model
-	Name        string `json:"name" form:"name"`
-	Description string `json:"description" form:"description"`
-	Status      int    `json:"status" form:"status"`
+	Name        string `gorm:"column:name" json:"name" form:"name"`
+	Description string `gorm:"column:description" json:"description" form:"description"`
+	Status      int    `gorm:"column:status" json:"status" form:"status"`
 }
 
 // t_tag
@@ -76,9 +76,9 @@ const (
 
 type Tag struct {
 	Model
-	Name        string `json:"name" form:"name"`
-	Description string `json:"description" form:"description"`
-	Status      int    `json:"status" form:"status"`
+	Name        string `gorm:"column:name" json:"name" form:"name"`
+	Description string `gorm:"column:description" json:"description" form:"description"`
+	Status      int    `gorm:"column:status" json:"status" form:"status"`
 }
 
 // t_article
@@ -100,22 +100,22 @@ const (
 
 type Article struct {
 	Model
-	CategoryId  int64  `json:"categoryId" form:"categoryId"`
-	UserId      int64  `json:"userId" form:"userId"`
-	Title       string `json:"title" form:"title"`
-	Summary     string `json:"summary" form:"summary"`
-	Content     string `json:"content" form:"content"`
-	ContentType string `json:"contentType" form:"contentType"`
-	Status      int    `json:"status" form:"status"`
-	Type        int    `json:"type" form:"type"`
-	SourceUrl   string `json:"sourceUrl" form:"sourceUrl"`
+	CategoryId  int64  `gorm:"column:categoryId" json:"categoryId" form:"categoryId"`
+	UserId      int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	Title       string `gorm:"column:title" json:"title" form:"title"`
+	Summary     string `gorm:"column:summary" json:"summary" form:"summary"`
+	Content     string `gorm:"column:content" json:"content" form:"content"`
+	ContentType string `gorm:"column:contentType" json:"contentType" form:"contentType"`
+	Status      int    `gorm:"column:status" json:"status" form:"status"`
+	Type        int    `gorm:"column:type" json:"type" form:"type"`
+	SourceUrl   string `gorm:"column:sourceUrl" json:"sourceUrl" form:"sourceUrl"`
 }
 
 // t_article_tag
 type ArticleTag struct {
 	Model
-	ArticleId int64 `json:"articleId" form:"articleId"`
-	TagId     int64 `json:"tagId" form:"tagId"`
+	ArticleId int64 `gorm:"column:articleId" json:"articleId" form:"articleId"`
+	TagId     int64 `gorm:"column:tagId" json:"tagId" form:"tagId"`
 }
 
 // t_comment
@@ -131,20 +131,20 @@ const (
 
 type Comment struct {
 	Model
-	UserId     int64  `json:"userId" form:"userId"`
-	EntityType string `json:"entityType" form:"entityType"`
-	EntityId   int64  `json:"entityId" form:"entityId"`
-	Content    string `json:"content" form:"content"`
-	QuoteId    int64  `json:"quoteId" form:"quoteId"`
-	Status     int    `json:"status" form:"status"`
+	UserId     int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	EntityType string `gorm:"column:entityType" json:"entityType" form:"entityType"`
+	EntityId   int64  `gorm:"column:entityId" json:"entityId" form:"entityId"`
+	Content    string `gorm:"column:content" json:"content" form:"content"`
+	QuoteId    int64  `gorm:"column:quoteId" json:"quoteId" form:"quoteId"`
+	Status     int    `gorm:"column:status" json:"status" form:"status"`
 }
 
 // t_favorite
 type Favorite struct {
 	Model
-	UserId     int64  `json:"userId" form:"userId"`
-	EntityType string `json:"entityType" form:"entityType"`
-	EntityId   int64  `json:"entityId" form:"entityId"`
+	UserId     int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	EntityType string `gorm:"column:entityType" json:"entityType" form:"entityType"`
+	EntityId   int64  `gorm:"column:entityId" json:"entityId" form:"entityId"`
 }
 
 // t_topic
@@ -155,19 +155,19 @@ const (
 
 type Topic struct {
 	Model
-	UserId          int64  `json:"userId" form:"userId"`
-	Title           string `json:"title" form:"title"`
-	Content         string `json:"content" form:"content"`
-	ViewCount       int64  `json:"viewCount" form:"viewCount"`
-	Status          int    `json:"status" form:"status"`
-	LastCommentTime int64  `json:"lastCommentTime" form:"lastCommentTime"`
+	UserId          int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	Title           string `gorm:"column:title" json:"title" form:"title"`
+	Content         string `gorm:"column:content" json:"content" form:"content"`
+	ViewCount       int64  `gorm:"column:viewCount" json:"viewCount" form:"viewCount"`
+	Status          int    `gorm:"column:status" json:"status" form:"status"`
+	LastCommentTime int64  `gorm:"column:lastCommentTime" json:"lastCommentTime" form:"lastCommentTime"`
 }
 
 // t_topic_tag
 type TopicTag struct {
 	Model
-	TopicId int64 `json:"topicId" form:"topicId"`
-	TagId   int64 `json:"tagId" form:"tagId"`
+	TopicId int64 `gorm:"column:topicId" json:"topicId" form:"topicId"`
+	TagId   int64 `gorm:"column:tagId" json:"tagId" form:"tagId"`
 }
 
 // t_message
@@ -183,19 +183,19 @@ const (
 
 type Message struct {
 	Model
-	FromId       int64  `json:"fromId" form:"fromId"`
-	UserId       int64  `json:"userId" form:"userId"`
-	Content      string `json:"content" form:"content"`
-	QuoteContent string `json:"quoteContent" form:"quoteContent"`
-	Type         int    `json:"type" form:"type"`
-	ExtraData    string `json:"extraData" form:"extraData"`
-	Status       int    `json:"status" form:"status"`
+	FromId       int64  `gorm:"column:fromId" json:"fromId" form:"fromId"`
+	UserId       int64  `gorm:"column:userId" json:"userId" form:"userId"`
+	Content      string `gorm:"column:content" json:"content" form:"content"`
+	QuoteContent string `gorm:"column:quoteContent" json:"quoteContent" form:"quoteContent"`
+	Type         int    `gorm:"column:type" json:"type" form:"type"`
+	ExtraData    string `gorm:"column:extraData" json:"extraData" form:"extraData"`
+	Status       int    `gorm:"column:status" json:"status" form:"status"`
 }
 
-type SysConfig struct {
+type SystemConfig struct {
 	Model
-	Key         string `json:"key" form:"key"`
-	Value       string `json:"value" form:"value"`
-	Name        string `json:"name" form:"name"`
-	Description string `json:"description" form:"description"`
+	Key         string `gorm:"column:key" json:"key" form:"key"`
+	Value       string `gorm:"column:value" json:"value" form:"value"`
+	Name        string `gorm:"column:name" json:"name" form:"name"`
+	Description string `gorm:"column:description" json:"description" form:"description"`
 }

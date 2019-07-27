@@ -1,0 +1,31 @@
+{{range .Articles}}
+<article class="media">
+    <div class="media-content">
+        <div class="content">
+            <div>
+                <a href="{{articleUrl .ArticleId}}">{{.Title}}</a>
+                <div>{{.Summary}}</div>
+            </div>
+        </div>
+        <nav class="level is-mobile">
+            <div class="level-left">
+                <a href="{{userUrl .User.Id}}" class="level-item">
+                    <span class="is-size-7">{{.User.Username}}</span>
+                </a>
+                <span class="level-item has-text-grey is-size-7">
+                    {{prettyTime .CreateTime}}
+                </span>
+                {{if .Tags}}
+                {{range .Tags}}
+                    <a href="{{tagArticlesUrl .TagId 1}}" class="level-item">
+                        <span class="tag">
+                        {{.TagName}}
+                        </span>
+                    </a>
+                {{end}}
+                {{end}}
+            </div>
+        </nav>
+    </div>
+</article>
+{{end}}

@@ -1,0 +1,38 @@
+{{if .ActiveUsers}}
+<div class="widget">
+    <div class="card">
+        <header class="card-header">
+            <p class="card-header-title">
+                活跃用户
+            </p>
+        </header>
+        <div class="card-content">
+            <div class="content">
+            {{range $index, $user := .ActiveUsers}}
+                <article class="media">
+                    <div class="media-left">
+                        <img style="border-radius: 100%" width="64" height="64" src="{{$user.Avatar}}">
+                    </div>
+                    <div class="media-content">
+                        <div class="content">
+                            <div>
+                                <a href="{{userUrl $user.Id}}">
+                                {{$user.Username}}
+                                </a>
+                                <div class="content line-clamp line-clamp-2">
+                                {{if $user.Description}}
+                                    {{$user.Description}}
+                                {{else}}
+                                    该用户未更新个人状态
+                                {{end}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            {{end}}
+            </div>
+        </div>
+    </div>
+</div>
+{{end}}

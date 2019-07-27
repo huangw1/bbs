@@ -1,4 +1,4 @@
-Env: prod # 环境，线上环境：prod、测试环境：dev
+Env: dev # 环境，线上环境：prod、测试环境：dev
 BaseUrl: hostname # 网站域名
 Port: 8082 # 端口
 ShowSql: false # 是否打印sql

@@ -1,5 +1,32 @@
 {{define "content"}}
-    <div>
-        测试模板引擎
+<div class="column is-9">
+    <div class="main-body">
+    {{if .Articles}}
+        <div class="widget">
+            <div class="card">
+                <header class="card-header">
+                    <p class="card-header-title">
+                        最新文章
+                    </p>
+                    <a href="#" class="card-header-icon" aria-label="more options">
+                      <span class="icon">
+                          <i class="fas fa-angle-double-right"></i>
+                      </span>
+                    </a>
+                </header>
+                <div class="card-content">
+                    <div class="content">
+                    {{include "partials/article/list" .}}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{end}}
     </div>
+</div>
+<div class="column is-3">
+    <div class="main-aside">
+    {{include "common/aside" .}}
+    </div>
+</div>
 {{end}}
